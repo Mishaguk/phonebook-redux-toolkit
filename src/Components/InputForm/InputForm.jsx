@@ -4,6 +4,7 @@ import styles from './PhonebookEditor.module.css';
 import * as actions from '../../redux/phoneBook/phoneBookActions';
 import shortid from 'shortid';
 import toastr from 'toastr';
+import { getIsContactExists } from '../../redux/phoneBook/selectors';
 toastr.options = {
 	closeButton: false,
 	debug: false,
@@ -26,15 +27,11 @@ const InputForm = () => {
 	const dispatch = useDispatch();
 	const [name, setName] = useState('');
 	const [number, setNumber] = useState('');
-	const isExists = useSelector(
-		state =>
-			!!state.phoneBookReducer.contacts.items.find(
-				contact => contact.name === name
-			)
-	);
+	const isExists = useSelector(getIsContactExists(name));
 
 	const handleSubmit = e => {
 		e.preventDefault();
+		
 		if (isExists) {
 			toastr.warning(`Contact ${name} is already exists`);
 			return;

@@ -10,7 +10,7 @@ export const deleteContact = id => ({
 	payload: id,
 });
 
-export const filterContact = contact => ({
+export const filterContact = filter => ({
 	type: phoneBookTypes.FILTER_CONTACT,
-	payload: contact,
+	payload: filter,
 });

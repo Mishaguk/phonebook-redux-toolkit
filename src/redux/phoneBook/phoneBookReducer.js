@@ -1,31 +1,35 @@
 import phoneBookTypes from './phoneBookTypes';
+import { combineReducers } from 'redux';
 const initialState = {
-	contacts: {
-		items: [],
-		filter: '',
-	},
+	items: [
+		{ id: 1, name: 'Bobby', number: '12345' },
+		{ id: 2, name: 'Peter', number: '45343' },
+		{ id: 3, name: 'John', number: '78778' },
+	],
+	filter: '',
 };
 
-const phoneBookReducer = (state = initialState, action) => {
+const items = (state = initialState.items, action) => {
 	switch (action.type) {
 		case phoneBookTypes.ADD_CONTACT:
-			return {
-				...state,
-				contacts: {
-					...state.contacts,
-					items: [...state.contacts.items, action.payload],
-				},
-			};
+			return [...state, action.payload];
+
 		case phoneBookTypes.DELETE_CONTACT:
-			return state.contacts.items.filter(
-				contact => contact.id !== action.payload
-			);
-		case phoneBookTypes.FILTER_CONTACT:
-			return state.filteredContacts;
+			return state.filter(contact => contact.id !== action.payload);
 
 		default:
 			return state;
 	}
 };
 
-export default phoneBookReducer;
+const filter = (state = initialState.filter, action) => {
+	switch (action.type) {
+		case phoneBookTypes.FILTER_CONTACT:
+			return action.payload;
+
+		default:
+			return state;
+	}
+};
+
+export default combineReducers({ items, filter });
