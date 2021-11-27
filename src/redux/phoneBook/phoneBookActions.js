@@ -14,3 +14,8 @@ export const filterContact = filter => ({
 	type: phoneBookTypes.FILTER_CONTACT,
 	payload: filter,
 });
+
+export const loadContacts = contacts => ({
+	type: phoneBookTypes.LOAD_CONTACTS,
+	payload: contacts,
+});

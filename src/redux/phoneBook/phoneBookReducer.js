@@ -1,11 +1,7 @@
 import phoneBookTypes from './phoneBookTypes';
 import { combineReducers } from 'redux';
 const initialState = {
-	items: [
-		{ id: 1, name: 'Bobby', number: '12345' },
-		{ id: 2, name: 'Peter', number: '45343' },
-		{ id: 3, name: 'John', number: '78778' },
-	],
+	items: [],
 	filter: '',
 };
 
@@ -16,6 +12,8 @@ const items = (state = initialState.items, action) => {
 
 		case phoneBookTypes.DELETE_CONTACT:
 			return state.filter(contact => contact.id !== action.payload);
+		case phoneBookTypes.LOAD_CONTACTS:
+			return action.payload;
 
 		default:
 			return state;

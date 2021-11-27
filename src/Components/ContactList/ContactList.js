@@ -1,28 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ContactItem from '../ContactItem/ContactItem';
+import { useCallback } from 'react';
 import { deleteContact } from '../../redux/phoneBook/phoneBookActions';
 import { getContacts, getFilter } from '../../redux/phoneBook/selectors';
 
 const ContactList = () => {
 	const dispatch = useDispatch();
-	const contacts = useSelector(getContacts);
 	const filter = useSelector(getFilter);
-	const filteredContacts = filter
-		? contacts.filter(({ name }) =>
-				name.toLowerCase().includes(filter.toLowerCase())
-		  )
-		: contacts;
+	const contacts = useSelector(getContacts(filter));
 
-	const handleDelete = id => {
-		dispatch(deleteContact(id));
-	};
+	const handleDelete = useCallback(
+		id => dispatch(deleteContact(id)),
+		[dispatch]
+	);
+
 	return (
 		<ul>
-			{filteredContacts.map(contact => (
+			{contacts.map(contact => (
 				<ContactItem
 					key={contact.id}
 					contact={contact}
-					onDelete={() => handleDelete(contact.id)}
+					onDelete={handleDelete}
 				/>
 			))}
 		</ul>

@@ -1,4 +1,9 @@
-export const getContacts = state => state.phoneBookReducer.items;
+export const getContacts = filter => state =>
+	filter
+		? state.phoneBookReducer.items.filter(({ name }) =>
+				name.toLowerCase().includes(filter.toLowerCase())
+		  )
+		: state.phoneBookReducer.items;
 
 export const getIsContactExists = name => {
 	return state =>
