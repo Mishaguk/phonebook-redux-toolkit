@@ -1,21 +1,10 @@
-import phoneBookTypes from './phoneBookTypes';
+import { createAction } from '@reduxjs/toolkit';
 
-export const contactAdd = contact => ({
-	type: phoneBookTypes.ADD_CONTACT,
-	payload: contact,
-});
+export const contactAdd = createAction('ADD_CONTACT');
+export const deleteContact = createAction('DELETE_CONTACT');
+export const filterContact = createAction('FILTER_CONTACT');
+export const loadContacts = createAction('LOAD_CONTACTS');
 
-export const deleteContact = id => ({
-	type: phoneBookTypes.DELETE_CONTACT,
-	payload: id,
-});
+// const toExport = { contactAdd, deleteContact, filterContact, loadContacts };
 
-export const filterContact = filter => ({
-	type: phoneBookTypes.FILTER_CONTACT,
-	payload: filter,
-});
-
-export const loadContacts = contacts => ({
-	type: phoneBookTypes.LOAD_CONTACTS,
-	payload: contacts,
-});
+//  default toExport;

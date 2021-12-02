@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './PhonebookEditor.module.css';
-import * as actions from '../../redux/phoneBook/phoneBookActions';
+import { contactAdd } from '../../redux/phoneBook/phoneBookActions';
 import shortid from 'shortid';
 import toastr from 'toastr';
 import { getIsContactExists } from '../../redux/phoneBook/selectors';
-
 
 const InputForm = () => {
 	const dispatch = useDispatch();
@@ -15,14 +14,14 @@ const InputForm = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		
+
 		if (isExists) {
 			toastr.warning(`Contact ${name} is already exists`);
 			return;
 		}
 
 		dispatch(
-			actions.contactAdd({
+			contactAdd({
 				id: shortid.generate(),
 				name,
 				number,

@@ -1,4 +1,4 @@
-import phoneBookTypes from './phoneBookTypes';
+import phoneBookActions from './phoneBookActions';
 import { combineReducers } from 'redux';
 const initialState = {
 	items: [],
@@ -7,12 +7,12 @@ const initialState = {
 
 const items = (state = initialState.items, action) => {
 	switch (action.type) {
-		case phoneBookTypes.ADD_CONTACT:
+		case phoneBookActions.contactAdd.type:
 			return [...state, action.payload];
 
-		case phoneBookTypes.DELETE_CONTACT:
+		case phoneBookActions.deleteContact.type:
 			return state.filter(contact => contact.id !== action.payload);
-		case phoneBookTypes.LOAD_CONTACTS:
+		case phoneBookActions.filterContact.type:
 			return action.payload;
 
 		default:
@@ -22,7 +22,7 @@ const items = (state = initialState.items, action) => {
 
 const filter = (state = initialState.filter, action) => {
 	switch (action.type) {
-		case phoneBookTypes.FILTER_CONTACT:
+		case phoneBookActions.loadContacts.type:
 			return action.payload;
 
 		default:
