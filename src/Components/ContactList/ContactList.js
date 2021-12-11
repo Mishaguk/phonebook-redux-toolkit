@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ContactItem from '../ContactItem/ContactItem';
 import { useCallback } from 'react';
-import { deleteContact } from '../../redux/phoneBook/phoneBookActions';
+import * as operations from '../../redux/phoneBook/phonebookOperations';
 import { getContacts, getFilter } from '../../redux/phoneBook/selectors';
 
 const ContactList = () => {
@@ -10,7 +10,7 @@ const ContactList = () => {
 	const contacts = useSelector(getContacts(filter));
 
 	const handleDelete = useCallback(
-		id => dispatch(deleteContact(id)),
+		id => dispatch(operations.deleteContact(id)),
 		[dispatch]
 	);
 
